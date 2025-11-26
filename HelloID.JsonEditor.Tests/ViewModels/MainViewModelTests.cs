@@ -270,7 +270,7 @@ public class MainViewModelTests
         var title = _viewModel.WindowTitle;
 
         // Assert
-        title.Should().Contain("TOPdesk Permissions Editor");
+        title.Should().Contain("HelloID - JSON Editor for TOPdesk Permissions");
         title.Should().Contain("Untitled");
     }
 

@@ -88,7 +88,7 @@ public class ValidationServiceTests
     }
 
     [Fact]
-    public void ValidateIncidentPermission_BothSectionsEmpty_ReturnsInvalid()
+    public void ValidateIncidentPermission_BothSectionsEmpty_ReturnsValid()
     {
         // Arrange
         var permission = new IncidentPermission
@@ -103,8 +103,8 @@ public class ValidationServiceTests
         var result = _validationService.ValidateIncidentPermission(permission);
 
         // Assert
-        result.IsValid.Should().BeFalse();
-        result.Errors.Should().Contain("At least one section (Grant or Revoke) must have content");
+        // Empty sections are allowed - user can fill them in later
+        result.IsValid.Should().BeTrue();
     }
 
     [Fact]
@@ -162,10 +162,10 @@ public class ValidationServiceTests
 
         // Assert
         result.IsValid.Should().BeFalse();
-        result.Errors.Should().HaveCount(3);
+        result.Errors.Should().HaveCount(2);
         result.Errors.Should().Contain("Id is required and cannot be empty");
         result.Errors.Should().Contain("DisplayName is required and cannot be empty");
-        result.Errors.Should().Contain("At least one section (Grant or Revoke) must have content");
+        // Empty sections are allowed - user can fill them in later
     }
 
     #endregion
@@ -226,7 +226,7 @@ public class ValidationServiceTests
     }
 
     [Fact]
-    public void ValidateChangePermission_BothSectionsEmpty_ReturnsInvalid()
+    public void ValidateChangePermission_BothSectionsEmpty_ReturnsValid()
     {
         // Arrange
         var permission = new ChangePermission
@@ -241,8 +241,8 @@ public class ValidationServiceTests
         var result = _validationService.ValidateChangePermission(permission);
 
         // Assert
-        result.IsValid.Should().BeFalse();
-        result.Errors.Should().Contain("At least one section (Grant or Revoke) must have content");
+        // Empty sections are allowed - user can fill them in later
+        result.IsValid.Should().BeTrue();
     }
 
     #endregion
