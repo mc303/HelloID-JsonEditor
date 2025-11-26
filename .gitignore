@@ -91,9 +91,12 @@ Thumbs.db
 *.sln.iml
 
 # exclude
-TestData/
+/TestData/
 exclude/
 *.png
 
 # Project-specific files
 CLAUDE.md
+
+# But keep test fixtures
+!HelloID.JsonEditor.Tests/TestData/
