@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelloID.JsonEditor.UI", "He
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelloID.JsonEditor.Tests", "HelloID.JsonEditor.Tests\HelloID.JsonEditor.Tests.csproj", "{E3BD4BC2-1A28-4C15-A05A-FF5D893DF1ED}"
 EndProject
+Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "HelloID.JsonEditor.Installer", "HelloID.JsonEditor.Installer\HelloID.JsonEditor.Installer.wixproj", "{F51C1586-C56C-4D76-ADF0-D0CA2266F111}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -55,6 +57,12 @@ Global
 		{E3BD4BC2-1A28-4C15-A05A-FF5D893DF1ED}.Release|x64.Build.0 = Release|Any CPU
 		{E3BD4BC2-1A28-4C15-A05A-FF5D893DF1ED}.Release|x86.ActiveCfg = Release|Any CPU
 		{E3BD4BC2-1A28-4C15-A05A-FF5D893DF1ED}.Release|x86.Build.0 = Release|Any CPU
+		{F51C1586-C56C-4D76-ADF0-D0CA2266F111}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F51C1586-C56C-4D76-ADF0-D0CA2266F111}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{F51C1586-C56C-4D76-ADF0-D0CA2266F111}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{F51C1586-C56C-4D76-ADF0-D0CA2266F111}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F51C1586-C56C-4D76-ADF0-D0CA2266F111}.Release|x64.ActiveCfg = Release|Any CPU
+		{F51C1586-C56C-4D76-ADF0-D0CA2266F111}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

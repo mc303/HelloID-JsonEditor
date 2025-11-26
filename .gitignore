@@ -101,3 +101,23 @@ CLAUDE.md
 
 # But keep test fixtures
 !HelloID.JsonEditor.Tests/TestData/
+
+
+# --- Build Output ---
+bin/
+obj/
+
+# --- Temporary Publish Folder (Used by our build script) ---
+/publish/
+
+# --- WiX / Installer Artifacts ---
+*.msi
+*.wixpdb
+*.wixobj
+*.cab
+
+# --- Visual Studio / VS Code ---
+.vs/
+.vscode/
+*.user
+*.suo

@@ -66,8 +66,15 @@ public partial class MainViewModel : ViewModelBase
     /// <summary>
     /// Window title including file name and unsaved indicator
     /// </summary>
-    public string WindowTitle =>
-        $"HelloID - JSON Editor for TOPdesk Permissions - {CurrentFileName}{(HasUnsavedChanges ? "*" : "")}";
+    public string WindowTitle
+    {
+        get
+        {
+            var version = System.Reflection.Assembly.GetExecutingAssembly()
+                .GetName().Version?.ToString(3) ?? "0.1.23";
+            return $"HelloID - JSON Editor for TOPdesk Permissions v{version} - {CurrentFileName}{(HasUnsavedChanges ? "*" : "")}";
+        }
+    }
 
     /// <summary>
     /// Type of permission file currently loaded

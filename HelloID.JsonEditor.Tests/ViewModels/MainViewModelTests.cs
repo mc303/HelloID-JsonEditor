@@ -272,6 +272,7 @@ public class MainViewModelTests
         // Assert
         title.Should().Contain("HelloID - JSON Editor for TOPdesk Permissions");
         title.Should().Contain("Untitled");
+        title.Should().MatchRegex(@"v\d+\.\d+\.\d+"); // Should contain version like v0.1.23
     }
 
     [Fact]

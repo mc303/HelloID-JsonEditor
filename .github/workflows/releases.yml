@@ -1,0 +1,45 @@
+name: Build and Release MSI
+
+on:
+  push:
+    tags:
+      - 'v*' # Triggers only when you push a tag (e.g., v1.0.0)
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-release:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '8.0.x'
+
+    - name: Publish WPF App
+      # 1. Create the executable and place it in the ./publish folder
+      run: |
+        dotnet publish HelloID.JsonEditor.UI/HelloID.JsonEditor.UI.csproj -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -o ./publish
+
+    - name: Build MSI
+      # 2. Build the WiX Project
+      # This uses the .wixproj file which contains the "Heat" harvester instructions
+      # and the x64 configuration.
+      run: |
+        dotnet build HelloID.JsonEditor.Installer/HelloID.JsonEditor.Installer.wixproj -c Release
+
+    - name: Create Release
+      uses: softprops/action-gh-release@v1
+      with:
+        files: |
+          # 3. Upload the MSI (Found in the project's bin/Release folder)
+          HelloID.JsonEditor.Installer/bin/Release/HelloID-JsonEditor.msi
+          # Optional: Upload the standalone EXE as well
+          ./publish/HelloID.JsonEditor.UI.exe
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

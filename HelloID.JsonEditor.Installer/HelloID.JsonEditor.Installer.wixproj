@@ -1,0 +1,30 @@
+<Project Sdk="WixToolset.Sdk/5.0.0">
+  <PropertyGroup>
+    <OutputName>HelloID-JsonEditor</OutputName>
+    <OutputType>Package</OutputType>
+    <InstallerPlatform>x64</InstallerPlatform>
+    <PublishDir>..\publish</PublishDir>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="WixToolset.Heat" Version="5.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <HarvestDirectory Include="$(PublishDir)">
+      <ComponentGroupName>AppComponents</ComponentGroupName>
+      <DirectoryRefId>INSTALLFOLDER</DirectoryRefId>
+      <SuppressRootDirectory>true</SuppressRootDirectory>
+      
+      <!-- ADD THESE TWO LINES TO FIX WARNINGS: -->
+      <SuppressCom>true</SuppressCom>
+      <SuppressRegistry>true</SuppressRegistry>
+    </HarvestDirectory>
+    
+    <BindPath Include="$(PublishDir)" /> 
+  </ItemGroup>
+  
+  <!-- Note: We removed the explicit <Compile Include="Package.wxs" /> 
+       because the SDK includes all .wxs files automatically. 
+       This helps prevent duplicate references. -->
+</Project>

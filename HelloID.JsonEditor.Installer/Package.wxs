@@ -1,0 +1,42 @@
+<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
+  <Package Name="HelloID JsonEditor" Manufacturer="mc303" Version="0.1.21.0" UpgradeCode="a1b2c3d4-e5f6-7890-1234-567890abcdef">
+    <MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+    <MediaTemplate EmbedCab="yes" />
+
+    <Feature Id="Main">
+      <!-- The files harvested from the publish folder -->
+      <ComponentGroupRef Id="AppComponents" />
+      <!-- The shortcut defined below -->
+      <ComponentRef Id="ApplicationShortcut" />
+    </Feature>
+  </Package>
+
+  <Fragment>
+      <!-- 1. Define the Install Folder (Program Files) -->
+      <StandardDirectory Id="ProgramFiles64Folder">
+          <Directory Id="INSTALLFOLDER" Name="HelloID JsonEditor" />
+      </StandardDirectory>
+
+      <!-- 2. Define the Start Menu Folder -->
+      <StandardDirectory Id="ProgramMenuFolder">
+          <Directory Id="ProgramMenuDir" Name="HelloID JsonEditor" />
+      </StandardDirectory>
+  </Fragment>
+
+  <Fragment>
+      <!-- 3. Create the Shortcut Component -->
+      <Component Id="ApplicationShortcut" Directory="ProgramMenuDir" Guid="*">
+          <Shortcut Id="ApplicationStartMenuShortcut"
+                    Name="HelloID JsonEditor"
+                    Description="Edit HelloID JSON configurations"
+                    Target="[INSTALLFOLDER]HelloID.JsonEditor.UI.exe"
+                    WorkingDirectory="INSTALLFOLDER" />
+          
+          <!-- We need to remove the folder on uninstall -->
+          <RemoveFolder Id="CleanUpShortCut" Directory="ProgramMenuDir" On="uninstall" />
+          
+          <!-- A shortcut component requires a RegistryValue as a KeyPath to detect installation state -->
+          <RegistryValue Root="HKCU" Key="Software\MC303\HelloIDJsonEditor" Name="installed" Type="integer" Value="1" KeyPath="yes" />
+      </Component>
+  </Fragment>
+</Wix>
