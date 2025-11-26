@@ -89,3 +89,11 @@ Thumbs.db
 # Rider
 .idea/
 *.sln.iml
+
+# exclude
+TestData/
+exclude/
+*.png
+
+# Project-specific files
+CLAUDE.md
