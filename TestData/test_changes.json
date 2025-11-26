@@ -1,0 +1,40 @@
+[
+  {
+    "Identification": {
+      "Id": "C001"
+    },
+    "DisplayName": "In/Uit dienst medewerker Levvel. TEST",
+    "Grant": {
+      "Requester": "$($p.PrimaryContract.Custom.Indieneraanvraagemail)",
+      "Request": "In dienst medewerker Levvel\r\n =============================================\r\n Naam: $($p.DisplayName)\r\n Geslacht: $($p.Details.Gender)\r\n Datum in dienst: $($p.PrimaryContract.Custom.FormattedStartDate)\r\n Afdeling: $($p.PrimaryContract.Custom.Afdeling) \r\n Functie: $($p.PrimaryContract.Title.Name )\r\n Kostenplaats: $($p.PrimaryContract.CostCenter.Name )\r\n Kostenplaatsnummer: $($p.PrimaryContract.CostCenter.Code)\r\n Personeelsnummer: $($p.ExternalId)\r\n =============================================================\r\n Gebruikersnaam: $($account.userPrincipalName)\r\n Wachtwoord: Het wachtwoord is verstuurd naar de portefeuillehouder en de servicedesk\r\n E-mailadres: $($account.mail)\r\n =============================================================\r\n Standplaats medewerker: $($p.PrimaryContract.Custom.UMR003desc) - $($p.PrimaryContract.Custom.UMR026)  (hoofdkantoor, flexkantoor, gezinshuis etc.)\r\n =============================================================\r\n De aanvraag betreft de volgende ICT middelen:\r\n Keuze ICT-account: $($p.PrimaryContract.Custom.KeuzeICTaccount)\r\n Afhaallocatie: $($p.PrimaryContract.Custom.AfhaallocatieMiddelen)\r\n Laptop: $($p.PrimaryContract.Custom.UMR004desc)\r\n Mobiele telefoon: $($p.PrimaryContract.Custom.UMR005desc)\r\n =============================================================\r\n De aanvraag betreft de volgende sleutels / pas / toegangsautorisaties:\r\n Kamersleutel (Frd/Rsw): $($p.PrimaryContract.Custom.UMR019desc)\r\n Toegangspas Rijksstraatweg: $($p.PrimaryContract.Custom.UMR017desc)\r\n Amsterdam UMC pas: $($p.PrimaryContract.Custom.UMR018desc) / $($p.PrimaryContract.Custom.UMR029desc)\r\n Voor welke gebouwen moet de pas geactiveerd worden?: $($p.PrimaryContract.Custom.UMR030)\r\n Parkline: $($p.PrimaryContract.Custom.UMR037)\r\n =============================================================\r\n De aanvraag betreft de volgende applicatie autorisaties:\r\n Inplanning CAO Jeugdzorg: $($p.PrimaryContract.Custom.UMR028desc)\r\n Medicore: $($p.PrimaryContract.Custom.UMR039desc)\r\n SPSS: $($p.PrimaryContract.Custom.UMR027desc)\r\n Spend Cloud: $($p.PrimaryContract.Custom.UMR022desc)\r\n Levvel Incident melden: $($p.PrimaryContract.Custom.UMR023desc)\r\n",
+      "Action": "",
+      "BriefDescription": "Medewerker in dienst Levvel: $($p.DisplayName)",
+      "Template": "Ws 008",
+      "Category": "ICT Aanvragen",
+      "SubCategory": "Overige aanvragen",
+      "ChangeType": "Simple",
+      "Impact": "Persoon",
+      "Benefit": "",
+      "Priority": "P1",
+      "EnableGetAssets": false,
+      "SkipNoAssetsFound": false,
+      "AssetsFilter": null
+    },
+    "Revoke": {
+      "Requester": "$($p.PrimaryManager.ExternalId)",
+      "Request": "Uit dienst medewerker Levvel\r\n ========================================\r\n Naam: $($p.DisplayName)\r\n Datum uit dienst: $($p.PrimaryContract.Custom.FormattedEndDate)\r\n Afdeling: $($p.PrimaryContract.Custom.Afdeling) \r\n Functie: $($p.PrimaryContract.Title.Name )\r\n Kostenplaats: $($p.PrimaryContract.CostCenter.Name )\r\n Kostenplaatsnummer: $($p.PrimaryContract.CostCenter.Code)\r\n Personeelsnummer: $($p.ExternalId)\r\n =============================================================\r\n Medewerker levert de volgende ICT middelen in:\r\n Laptop: $($p.PrimaryContract.Custom.UMR004desc)\r\n Mobiele telefoon: $($p.PrimaryContract.Custom.UMR005desc)\r\n =============================================================\r\n Medewerker levert de volgende sleutels / pas / toegangsautorisaties in:\r\n Kamersleutel (Frd/Rsw): $($p.PrimaryContract.Custom.UMR019desc)\r\n KABA badge: $($p.PrimaryContract.Custom.UMR006desc)\r\n Toegangspas Rijksstraatweg: $($p.PrimaryContract.Custom.UMR017desc)\r\n Amsterdam UMC pas: $($p.PrimaryContract.Custom.UMR018desc) / $($p.PrimaryContract.Custom.UMR029desc)\r\n Parkline: $($p.PrimaryContract.Custom.UMR037desc)\r\n =============================================================\r\n De aanvraag betreft het opheffen van toegang tot de volgende applicaties:\r\n Inplanning CAO Jeugdzorg: $($p.PrimaryContract.Custom.UMR028desc)\r\n Medicore: $($p.PrimaryContract.Custom.UMR039desc)\r\n SPSS: $($p.PrimaryContract.Custom.UMR027desc)\r\n Spend Cloud: $($p.PrimaryContract.Custom.UMR022desc)\r\n Levvel Incident melden: $($p.PrimaryContract.Custom.UMR023desc)\r\n =============================================================\r\n",
+      "Action": "",
+      "BriefDescription": "Uit dienst medewerker Levvel: $($p.DisplayName)",
+      "Template": "Ws 009",
+      "Category": "ICT Aanvragen",
+      "SubCategory": "Overige aanvragen",
+      "ChangeType": "",
+      "Impact": "Persoon",
+      "Benefit": "",
+      "Priority": "P1",
+      "EnableGetAssets": false,
+      "SkipNoAssetsFound": false,
+      "AssetsFilter": null
+    }
+  }
+]

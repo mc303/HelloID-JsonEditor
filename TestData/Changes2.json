@@ -1,0 +1,41 @@
+[
+  {
+    "Identification": {
+      "Id": "C001",
+      "id": "C001"
+    },
+    "DisplayName": "TEST dit id frjkhkjhk",
+    "Grant": {
+      "Requester": "$($p.PrimaryContract.Custom.Indieneraanvraagemail || $p.PrimaryManager.Email )",
+      "Request": "In dienst medewerker Levvel\n =============================================================\n Naam: $($p.DisplayName)\n Geslacht: $($p.Details.Gender)\n Datum in dienst: $($p.PrimaryContract.Custom.FormattedStartDate)\n Afdeling: $($p.PrimaryContract.Custom.Afdeling)\n Functie: $($p.PrimaryContract.Title.Name)\n Kostenplaats: $($p.PrimaryContract.CostCenter.Name)\n Kostenplaatsnummer: $($p.PrimaryContract.CostCenter.Code)\n Personeelsnummer: $($p.ExternalId)\n Standplaats medewerker: $($p.PrimaryContract.Custom.UMR003desc) - $($p.PrimaryContract.Custom.UMR026)  (Hoofdkantoor, Flexkantoor, Gezinshuis etc.) \n =============================================================\n ICT-account: $($p.PrimaryContract.Custom.KeuzeICTaccount)\n Gebruikersnaam: $($account.userPrincipalName)\n Wachtwoord: Het wachtwoord is verstuurd naar de portefeuillehouder en de servicedesk\n E-mailadres: $($account.mail)\n =============================================================\n Aanvraag applicatie autorisaties:\n Inplanning CAO Jeugdzorg: $($p.PrimaryContract.Custom.UMR028desc)\n Spend Cloud: $($p.PrimaryContract.Custom.UMR022desc)\n Medicore: $($p.PrimaryContract.Custom.UMR039desc)\n TPSC incident afhandelen: $($p.PrimaryContract.Custom.UMR023desc)\n SPSS: $($p.PrimaryContract.Custom.UMR027desc)\n =============================================================\n Aanvraag ICT middelen:\n Laptop: $($p.PrimaryContract.Custom.UMR004desc)\n Mobiele telefoon: $($p.PrimaryContract.Custom.UMR005desc)\n Afhaallocatie: $($p.PrimaryContract.Custom.AfhaallocatieMiddelen)\n =============================================================\n Aanvraag Sleutels / Pas / Toegangsautorisaties:\n KABA badge: $($p.PrimaryContract.Custom.UMR006desc)\n Amsterdam UMC pas: $($p.PrimaryContract.Custom.UMR018desc) / $($p.PrimaryContract.Custom.UMR029desc)\n Voor welke gebouwen moet de pas geactiveerd worden?: $($p.PrimaryContract.Custom.UMR030)\n Salto Pas: $($p.PrimaryContract.Custom.UMR017desc)\n Kamersleutel (Frd/Rsw): $($p.PrimaryContract.Custom.UMR019desc)\n =============================================================\n",
+      "Action": null,
+      "BriefDescription": "Medewerker in dienst Levvel: $($p.DisplayName)",
+      "Template": "Ws 008",
+      "Category": "Indienst/uitdienst",
+      "SubCategory": "Indienst",
+      "ChangeType": "Simple",
+      "Impact": "Persoon",
+      "Benefit": null,
+      "Priority": "P1",
+      "EnableGetAssets": false,
+      "SkipNoAssetsFound": false,
+      "AssetsFilter": null
+    },
+    "Revoke": {
+      "Requester": "$($p.PrimaryManager.ExternalId)",
+      "Request": "Uit dienst medewerker Levvel\n =============================================================\n Naam: $($p.DisplayName)\n Datum uit dienst: $($p.PrimaryContract.Custom.FormattedEndDate)\n Afdeling: $($p.PrimaryContract.Custom.Afdeling)\n Functie: $($p.PrimaryContract.Title.Name)\n Kostenplaats: $($p.PrimaryContract.CostCenter.Name)\n Kostenplaatsnummer: $($p.PrimaryContract.CostCenter.Code)\n Personeelsnummer: $($p.ExternalId)\n Standplaats medewerker: $($p.PrimaryContract.Custom.UMR003desc) - $($p.PrimaryContract.Custom.UMR026)  (Hoofdkantoor, Flexkantoor, Gezinshuis etc.)\n=============================================================\n Verwijderen applicatie autorisaties door applicatiebeheer:\n Inplanning CAO Jeugdzorg: $($p.PrimaryContract.Custom.UMR028desc)\n Spend Cloud: $($p.PrimaryContract.Custom.UMR022desc)\n Medicore: $($p.PrimaryContract.Custom.UMR039desc)\n TPSC incident afhandelen: $($p.PrimaryContract.Custom.UMR023desc)\n SPSS: $($p.PrimaryContract.Custom.UMR027desc)\n =============================================================\n Inleveren ICT middelen door medewerker:\n Laptop: $($p.PrimaryContract.Custom.UMR004desc)\n Mobiele telefoon: $($p.PrimaryContract.Custom.UMR005desc)\n Inleverlocatie: $($p.PrimaryContract.Custom.AfhaallocatieMiddelen)\n =============================================================\n Inleveren Sleutels / Pas / Toegangsautorisaties door medewerker:\n KABA badge: $($p.PrimaryContract.Custom.UMR006desc)\n Amsterdam UMC pas: $($p.PrimaryContract.Custom.UMR018desc) / $($p.PrimaryContract.Custom.UMR029desc)\n Voor welke gebouwen moet de pas gedeactiveerd worden?: $($p.PrimaryContract.Custom.UMR030)\n Salto Pas: $($p.PrimaryContract.Custom.UMR017desc)\n Kamersleutel (Frd/Rsw): $($p.PrimaryContract.Custom.UMR019desc)\n =============================================================\n",
+      "Action": null,
+      "BriefDescription": "Uit dienst medewerker Levvel: $($p.DisplayName)",
+      "Template": "Ws 009",
+      "Category": "Indienst/uitdienst",
+      "SubCategory": "Uitdienst",
+      "ChangeType": "",
+      "Impact": "Persoon",
+      "Benefit": null,
+      "Priority": "P1",
+      "EnableGetAssets": false,
+      "SkipNoAssetsFound": false,
+      "AssetsFilter": null
+    }
+  }
+]

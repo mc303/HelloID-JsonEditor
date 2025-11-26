@@ -1,0 +1,152 @@
+﻿<Window x:Class="HelloID.JsonEditor.UI.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HelloID.JsonEditor.UI"
+        xmlns:vm="clr-namespace:HelloID.JsonEditor.UI.ViewModels"
+        xmlns:models="clr-namespace:HelloID.JsonEditor.Models;assembly=HelloID.JsonEditor.Core"
+        xmlns:views="clr-namespace:HelloID.JsonEditor.UI.Views"
+        mc:Ignorable="d"
+        Title="{Binding WindowTitle}"
+        Height="1000" Width="1200"
+        MinHeight="500" MinWidth="800" WindowStartupLocation="CenterScreen">
+
+    <Window.Resources>
+        <!-- Converter for visibility -->
+        <BooleanToVisibilityConverter x:Key="BoolToVis"/>
+    </Window.Resources>
+
+    <DockPanel>
+        <!-- Menu Bar -->
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="_File">
+                <MenuItem Header="_New">
+                    <MenuItem Header="New _Incident File" Click="NewIncidentFile_Click" InputGestureText="Ctrl+N"/>
+                    <MenuItem Header="New _Change File" Click="NewChangeFile_Click" InputGestureText="Ctrl+Shift+N"/>
+                </MenuItem>
+                <MenuItem Header="_Edit">
+                    <MenuItem Header="Add _Incident Permission" Click="AddIncident_Click" InputGestureText="Ctrl+I"
+                          IsEnabled="{Binding IsIncidentFile}"/>
+                    <MenuItem Header="Add _Change Permission" Click="AddChange_Click" InputGestureText="Ctrl+H"
+                          IsEnabled="{Binding IsChangeFile}"/>
+                    <Separator/>
+                    <MenuItem Header="_Delete" Click="Delete_Click" InputGestureText="Del"/>
+                    <MenuItem Header="D_uplicate" Click="Duplicate_Click" InputGestureText="Ctrl+D"/>
+                </MenuItem>
+                <MenuItem Header="_Open..." Click="OpenFile_Click" InputGestureText="Ctrl+O"/>
+                <MenuItem Header="_Close" Click="CloseFile_Click" InputGestureText="Ctrl+W"
+                          IsEnabled="{Binding HasOpenFile}"/>
+                <Separator/>
+                <MenuItem Header="_Save" Click="SaveFile_Click" InputGestureText="Ctrl+S"
+                          IsEnabled="{Binding HasUnsavedChanges}"/>
+                <MenuItem Header="Save _As..." Click="SaveFileAs_Click"/>
+                <Separator/>
+                <MenuItem Header="E_xit" Click="Exit_Click" InputGestureText="Alt+F4"/>
+            </MenuItem>
+
+        </Menu>
+
+        <!-- Toolbar -->
+        <ToolBar DockPanel.Dock="Top">
+            <Button Content="Open" Click="OpenFile_Click" ToolTip="Open file (Ctrl+O)" Padding="8,4"/>
+            <Separator/>
+            <Button Content="New Incident" Click="NewIncidentFile_Click" ToolTip="New incident file (Ctrl+N)" Padding="8,4"/>
+            <Button Content="New Change" Click="NewChangeFile_Click" ToolTip="New change file (Ctrl+Shift+N)" Padding="8,4"/>
+            <Separator/>
+            <Button Content="Add Incident" Click="AddIncident_Click" ToolTip="Add new incident permission (Ctrl+I)" Padding="8,4"
+                    IsEnabled="{Binding IsIncidentFile}"/>
+            <Button Content="Add Change" Click="AddChange_Click" ToolTip="Add new change permission (Ctrl+H)" Padding="8,4"
+                    IsEnabled="{Binding IsChangeFile}"/>
+            <Separator/>
+            <Button Content="Delete" Click="Delete_Click" ToolTip="Delete selected permission (Del)" Padding="8,4"/>
+            <Button Content="Duplicate" Click="Duplicate_Click" ToolTip="Duplicate selected permission (Ctrl+D)" Padding="8,4"/>
+            <Separator/>
+            <Button Content="Save" Click="SaveFile_Click" ToolTip="Save file (Ctrl+S)" Padding="8,4"
+                    IsEnabled="{Binding HasUnsavedChanges}"/>            
+        </ToolBar>
+
+        <!-- Status Bar -->
+        <StatusBar DockPanel.Dock="Bottom" Height="24">
+            <StatusBarItem>
+                <TextBlock Text="{Binding StatusMessage}"/>
+            </StatusBarItem>
+            <Separator/>
+            <StatusBarItem>
+                <TextBlock>
+                    <Run Text="File: "/>
+                    <Run Text="{Binding CurrentFileName, Mode=OneWay}"/>
+                </TextBlock>
+            </StatusBarItem>
+            <Separator/>
+            <StatusBarItem>
+                <TextBlock Text="{Binding IsBusy, StringFormat='Busy: {0}'}" Visibility="Collapsed"/>
+            </StatusBarItem>
+        </StatusBar>
+
+        <!-- Main Content Area -->
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="300" MinWidth="200" MaxWidth="600"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*" MinWidth="400"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Left Panel: Permissions List -->
+            <DockPanel Grid.Column="0" LastChildFill="True">
+                <TextBlock DockPanel.Dock="Top" Text="Permissions" FontWeight="Bold"
+                           Padding="8,4" Background="#F0F0F0"/>
+
+                <!-- Unified Permissions List -->
+                <ListBox x:Name="PermissionsListBox"
+                         SelectedItem="{Binding SelectedPermission}"
+                         HorizontalContentAlignment="Stretch"
+                         HorizontalAlignment="Stretch">
+                    <ListBox.Style>
+                        <Style TargetType="ListBox">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsIncidentFile}" Value="True">
+                                    <Setter Property="ItemsSource" Value="{Binding IncidentPermissions}"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding IsChangeFile}" Value="True">
+                                    <Setter Property="ItemsSource" Value="{Binding ChangePermissions}"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ListBox.Style>
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="ListBoxItem">
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                        </Style>
+                    </ListBox.ItemContainerStyle>
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Margin="4">
+                                <TextBlock Text="{Binding DisplayName}" FontWeight="Bold"/>
+                                <TextBlock Text="{Binding Id}" FontSize="10" Foreground="Gray"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </DockPanel>
+
+            <!-- Splitter -->
+            <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch"
+                          Background="LightGray" ResizeDirection="Columns"
+                          ResizeBehavior="PreviousAndNext"/>
+
+            <!-- Right Panel: Detail Editor with Tabs -->
+            <TabControl Grid.Column="2" SelectedIndex="{Binding SelectedTabIndex}">
+                <!-- Incident Tab -->
+                <TabItem Header="Incident" IsEnabled="{Binding IsIncidentTabEnabled}">
+                    <views:IncidentEditorView DataContext="{Binding IncidentEditor}"/>
+                </TabItem>
+
+                <!-- Change Tab -->
+                <TabItem Header="Change" IsEnabled="{Binding IsChangeTabEnabled}">
+                    <views:ChangeEditorView DataContext="{Binding ChangeEditor}"/>
+                </TabItem>
+            </TabControl>
+        </Grid>
+    </DockPanel>
+</Window>
