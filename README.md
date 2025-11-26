@@ -1,4 +1,4 @@
-# TOPdesk Permissions Editor
+# HelloID - JSON Editor for TOPdesk Permissions
 
 A Windows desktop application for managing TOPdesk incident and change request permission JSON files.
 
