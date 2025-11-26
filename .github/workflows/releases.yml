@@ -3,7 +3,7 @@ name: Build and Release MSI
 on:
   push:
     tags:
-      - 'v*' # Triggers only when you push a tag (e.g., v1.0.0)
+      - 'v*' # Triggers on tags like v1.0.0
 
 permissions:
   contents: write
@@ -22,24 +22,28 @@ jobs:
         dotnet-version: '8.0.x'
 
     - name: Publish WPF App
-      # 1. Create the executable and place it in the ./publish folder
+      # We publish to the ./publish folder. 
+      # This folder contains everything the app needs to run.
       run: |
         dotnet publish HelloID.JsonEditor.UI/HelloID.JsonEditor.UI.csproj -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -o ./publish
 
     - name: Build MSI
-      # 2. Build the WiX Project
-      # This uses the .wixproj file which contains the "Heat" harvester instructions
-      # and the x64 configuration.
+      # Build the MSI installer using the files in ./publish
       run: |
         dotnet build HelloID.JsonEditor.Installer/HelloID.JsonEditor.Installer.wixproj -c Release
+
+    - name: Create Portable Zip
+      # NEW STEP: Zip the contents of the ./publish folder
+      run: |
+        Compress-Archive -Path ./publish/* -DestinationPath HelloID-JsonEditor-Portable.zip
 
     - name: Create Release
       uses: softprops/action-gh-release@v1
       with:
         files: |
-          # 3. Upload the MSI (Found in the project's bin/Release folder)
+          # The MSI Installer
           HelloID.JsonEditor.Installer/bin/Release/HelloID-JsonEditor.msi
-          # Optional: Upload the standalone EXE as well
-          ./publish/HelloID.JsonEditor.UI.exe
+          # The Portable Zip file
+          HelloID-JsonEditor-Portable.zip
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
