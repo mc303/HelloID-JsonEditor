@@ -97,6 +97,7 @@ exclude/
 
 # Project-specific files
 CLAUDE.md
+.claude/
 
 # But keep test fixtures
 !HelloID.JsonEditor.Tests/TestData/
