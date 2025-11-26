@@ -50,17 +50,6 @@ TopdeskPermissionsEditor/
 └── TopdeskPermissionsEditor.Tests/     # Unit tests
 ```
 
-## Documentation
-
-📋 **[DEVELOPMENT_PLAN.md](DEVELOPMENT_PLAN.md)** - Complete development specification with:
-- Detailed architecture design
-- Data models and structure
-- UI/UX mockups
-- Phase-by-phase implementation guide
-- Technical implementation details
-- Development standards
-- Timeline and milestones
-
 ## Quick Links
 
 - **Example incident.json**: https://raw.githubusercontent.com/Tools4everBV/HelloID-Conn-Prov-Target-Topdesk/refs/heads/main/permissions/incident/example.incident.json
