@@ -87,8 +87,4 @@ $p.PrimaryManager.DisplayName
 $p.PrimaryManager.Email
 $p.PrimaryManager.ExternalId
 $p.PrimaryManager.PersonId
-$p.PrimaryManager.DisplayName
-$p.PrimaryManager.Email
-$p.PrimaryManager.ExternalId
-$p.PrimaryManager.PersonId
 $p.UserName

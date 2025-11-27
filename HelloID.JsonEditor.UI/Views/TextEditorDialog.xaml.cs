@@ -46,6 +46,8 @@ public partial class TextEditorDialog : Window
                 _allVariables = File.ReadAllLines(replaceListPath)
                     .Where(line => !string.IsNullOrWhiteSpace(line))
                     .Select(line => line.Trim())
+                    .Distinct(StringComparer.OrdinalIgnoreCase) // Remove duplicates (case-insensitive)
+                    .OrderBy(line => line) // Sort alphabetically for easier browsing
                     .ToList();
 
                 VariableComboBox.ItemsSource = _allVariables;
